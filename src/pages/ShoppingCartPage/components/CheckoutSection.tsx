@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Box, Divider, Flex, HStack, Stack, styled } from 'styled-system/jsx';
 import { SECOND } from '@/constants/time';
 import { Button, Spacing, Text } from '@/ui-lib';
 import { toast } from '@/ui-lib/components/toast';
 import { delay } from '@/utils/async';
+import { CurrencyContext } from '@/providers/CurrencyProvider';
 
 function CheckoutSection() {
   const navigate = useNavigate();
@@ -18,6 +19,8 @@ function CheckoutSection() {
     await delay(SECOND * 2);
     navigate('/');
   };
+
+  const { CPrice } = useContext(CurrencyContext);
 
   return (
     <styled.section css={{ p: 5, bgColor: 'background.01_white' }}>
@@ -53,7 +56,7 @@ function CheckoutSection() {
 
           <HStack justify="space-between">
             <Text variant="H2_Bold">총 금액</Text>
-            <Text variant="H2_Bold">$30.59</Text>
+            <Text variant="H2_Bold">{CPrice(30.59)}</Text>
           </HStack>
         </Stack>
 
