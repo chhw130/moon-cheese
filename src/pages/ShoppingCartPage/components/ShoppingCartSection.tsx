@@ -1,8 +1,12 @@
 import { Button, Counter, Spacing, Text } from '@/ui-lib';
 import { Divider, Flex, Stack, styled } from 'styled-system/jsx';
 import ShoppingCartItem from './ShoppingCartItem';
+import { useContext } from 'react';
+import { CurrencyContext } from '@/providers/CurrencyProvider';
 
 function ShoppingCartSection() {
+  const { CPrice } = useContext(CurrencyContext);
+
   return (
     <styled.section css={{ p: 5, bgColor: 'background.01_white' }}>
       <Flex justify="space-between">
@@ -31,7 +35,7 @@ function ShoppingCartSection() {
               onDelete={() => {}}
             />
             <ShoppingCartItem.Footer>
-              <ShoppingCartItem.Price>$12.99</ShoppingCartItem.Price>
+              <ShoppingCartItem.Price>{CPrice(12.99)}</ShoppingCartItem.Price>
               <Counter.Root>
                 <Counter.Minus onClick={() => {}} disabled={true} />
                 <Counter.Display value={1} />
@@ -53,7 +57,7 @@ function ShoppingCartSection() {
               onDelete={() => {}}
             />
             <ShoppingCartItem.Footer>
-              <ShoppingCartItem.Price>$12.99</ShoppingCartItem.Price>
+              <ShoppingCartItem.Price>{CPrice(12.99)}</ShoppingCartItem.Price>
               <Counter.Root>
                 <Counter.Minus onClick={() => {}} disabled={true} />
                 <Counter.Display value={1} />
@@ -75,7 +79,7 @@ function ShoppingCartSection() {
               onDelete={() => {}}
             />
             <ShoppingCartItem.Footer>
-              <ShoppingCartItem.Price>$12.99</ShoppingCartItem.Price>
+              <ShoppingCartItem.Price>{CPrice(12.99)}</ShoppingCartItem.Price>
               <Counter.Root>
                 <Counter.Minus onClick={() => {}} disabled={true} />
                 <Counter.Display value={1} />

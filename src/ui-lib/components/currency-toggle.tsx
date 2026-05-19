@@ -84,6 +84,13 @@ export type CurrencyToggleProps = CurrencyToggleVariantProps & {
   disabled?: boolean;
 };
 
+// `현재 환율`을 서버에서 불러와주세요.
+// 1. 대한민국 `원`, 미국 `달러` **2종류의 통화**를 사용해요.
+// 2. 네트워크 요청은 `/utils/http.ts` 를 활용해 아래 API 문서를 기준으로 요청을 보내주세요.
+// `사용할 통화`를 선택하는 기능을 추가해주세요.
+// 1. 선택한 통화는 `서비스 전체`에 적용되어야 해요.
+// 2. 통화를 변경하면 현재 환율에 맞게 상품가격이 변경되어야 해요.
+// 3. 금액은 자릿수에 맞게 콤마(,)를 추가해주세요.
 const CurrencyToggle = ({ value, defaultValue = 'USD', onValueChange, disabled = false }: CurrencyToggleProps) => {
   const handleChange = (details: { checked: boolean }) => {
     onValueChange?.(details.checked ? 'KRW' : 'USD');

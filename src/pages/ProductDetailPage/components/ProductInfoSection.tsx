@@ -1,6 +1,8 @@
 import { Button, Counter, RatingGroup, Spacing, Text } from '@/ui-lib';
 import Tag, { type TagType } from '@/ui-lib/components/tag';
 import { Box, Divider, Flex, Stack, styled } from 'styled-system/jsx';
+import { useContext } from 'react';
+import { CurrencyContext } from '@/providers/CurrencyProvider';
 
 type ProductInfoSectionProps = {
   name: string;
@@ -11,6 +13,7 @@ type ProductInfoSectionProps = {
 };
 
 function ProductInfoSection({ name, category, rating, price, quantity }: ProductInfoSectionProps) {
+  const { CPrice } = useContext(CurrencyContext);
   return (
     <styled.section css={{ bg: 'background.01_white', p: 5 }}>
       {/* 상품 정보 */}
@@ -21,7 +24,7 @@ function ProductInfoSection({ name, category, rating, price, quantity }: Product
           <RatingGroup value={rating} readOnly label={`${rating.toFixed(1)}`} />
         </Stack>
         <Spacing size={4} />
-        <Text variant="H1_Bold">${price.toFixed(2)}</Text>
+        <Text variant="H1_Bold">{CPrice(price)}</Text>
       </Box>
 
       <Spacing size={5} />
