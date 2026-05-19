@@ -1,7 +1,5 @@
 import { Switch as ArkSwitch, switchAnatomy } from '@ark-ui/react';
 import { css, cx, type RecipeVariantProps, sva } from 'styled-system/css';
-import { useGetApiQuery } from '@/utils/hooks/useApiQuery';
-import { getCurrencyRate } from '@/utils/http';
 
 export type CurrencyToggleVariantProps = RecipeVariantProps<typeof currencyToggleRecipe>;
 
@@ -97,8 +95,6 @@ const CurrencyToggle = ({ value, defaultValue = 'USD', onValueChange, disabled =
   const handleChange = (details: { checked: boolean }) => {
     onValueChange?.(details.checked ? 'KRW' : 'USD');
   };
-
-  const { data: currencyRate } = useGetApiQuery(getCurrencyRate);
 
   const isCheckedKRW = value ? value === 'KRW' : defaultValue === 'KRW';
 

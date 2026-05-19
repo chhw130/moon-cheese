@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export const useGetApiQuery = <T>(apiRequsetFn: () => Promise<T>) => {
-  const [data, setData] = useState<T>();
+  const [data, setData] = useState<T | null>(null);
   const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {

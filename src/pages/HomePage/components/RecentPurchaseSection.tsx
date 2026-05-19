@@ -1,7 +1,11 @@
 import { Flex, styled } from 'styled-system/jsx';
 import { Spacing, Text } from '@/ui-lib';
+import { useContext } from 'react';
+import { CurrencyContext } from '@/providers/CurrencyProvider';
 
 function RecentPurchaseSection() {
+  const { CPrice } = useContext(CurrencyContext);
+
   return (
     <styled.section css={{ px: 5, pt: 4, pb: 8 }}>
       <Text variant="H1_Bold">최근 구매한 상품</Text>
@@ -35,7 +39,7 @@ function RecentPurchaseSection() {
           />
           <Flex flexDir="column" gap={1}>
             <Text variant="B2_Medium">월레스의 오리지널 웬슬리데일</Text>
-            <Text variant="H1_Bold">$12.99</Text>
+            <Text variant="H1_Bold">{CPrice(12.99)}</Text>
           </Flex>
         </Flex>
 
@@ -56,7 +60,7 @@ function RecentPurchaseSection() {
           />
           <Flex flexDir="column" gap={1}>
             <Text variant="B2_Medium">그랜드 데이 아웃 체다</Text>
-            <Text variant="H1_Bold">$14.87</Text>
+            <Text variant="H1_Bold">{CPrice(14.87)}</Text>
           </Flex>
         </Flex>
       </Flex>
