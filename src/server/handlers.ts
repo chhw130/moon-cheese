@@ -8,8 +8,7 @@ import {
   recommendProductIdMap,
 } from './data';
 
-// const ERROR_CHANCE = 0.33;
-const ERROR_CHANCE = 0;
+const ERROR_CHANCE = 0.33;
 
 type RecentProduct = {
   id: number;

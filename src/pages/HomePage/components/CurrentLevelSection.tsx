@@ -39,7 +39,7 @@ function CurrentLevelSection() {
         <Text variant="H1_Bold">현재 등급</Text>
         <Spacing size={4} />
         <Box bg="background.01_white" css={{ px: 5, py: 4, rounded: '2xl' }}>
-          <Text variant="H1_Bold">조회된 데이터가 존재하지 않습니다.</Text>
+          <Text variant="H1_Bold">에러가 발생했습니다.</Text>
         </Box>
       </styled.section>
     );
