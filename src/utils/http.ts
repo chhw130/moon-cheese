@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import type { GradePoint, UserInfo } from './types/user';
 import type { CurrencyRate } from './types/currency';
+import type { RecentPurchaseProductSchema } from './types/product';
 
 const axios = Axios.create();
 
@@ -23,4 +24,8 @@ export const getUserInfo = async () => {
 
 export const getGradePointList = async () => {
   return http.get<GradePoint>('/api/grade/point');
+};
+
+export const getRecentPurchaseProducts = async () => {
+  return http.get<RecentPurchaseProductSchema>('/api/recent/product/list');
 };

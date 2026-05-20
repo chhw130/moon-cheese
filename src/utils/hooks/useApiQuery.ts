@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 export const useGetApiQuery = <T>(apiRequsetFn: () => Promise<T>) => {
   const [data, setData] = useState<T | null>(null);
   const [isFetching, setIsFetching] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -11,7 +12,8 @@ export const useGetApiQuery = <T>(apiRequsetFn: () => Promise<T>) => {
         const data = await apiRequsetFn();
         setData(data as T);
       } catch (err: unknown) {
-        throw new Error(err as string);
+        setError(err as Error);
+        // throw new Error(err as string);
       } finally {
         setIsFetching(false);
       }
@@ -20,5 +22,5 @@ export const useGetApiQuery = <T>(apiRequsetFn: () => Promise<T>) => {
     fetchData();
   }, []);
 
-  return { data, isFetching };
+  return { data, isFetching, isError: Boolean(error), error };
 };
