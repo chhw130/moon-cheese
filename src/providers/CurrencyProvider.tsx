@@ -1,6 +1,6 @@
 import { useGetApiQuery } from '@/utils/hooks/useApiQuery';
 import { getCurrencyRate } from '@/utils/http';
-import type { Currency, CurrencyRate } from '@/utils/types';
+import type { Currency, CurrencyRate } from '@/utils/types/currency';
 import { createContext, useCallback, useState } from 'react';
 
 export const CurrencyContext = createContext<{

@@ -1,5 +1,6 @@
 import Axios from 'axios';
-import type { ExchangeRate } from './types';
+import type { GradePoint, UserInfo } from './types/user';
+import type { CurrencyRate } from './types/currency';
 
 const axios = Axios.create();
 
@@ -13,5 +14,13 @@ export const http = {
 };
 
 export const getCurrencyRate = async () => {
-  return http.get<ExchangeRate>('/api/exchange-rate');
+  return http.get<CurrencyRate>('/api/exchange-rate');
+};
+
+export const getUserInfo = async () => {
+  return http.get<UserInfo>('/api/me');
+};
+
+export const getGradePointList = async () => {
+  return http.get<GradePoint>('/api/grade/point');
 };
