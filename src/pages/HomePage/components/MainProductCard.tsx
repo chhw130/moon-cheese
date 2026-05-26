@@ -4,8 +4,9 @@ import { Counter } from '@/ui-lib';
 import { useNavigate } from 'react-router';
 import { useContext } from 'react';
 import type { Product, ProductCategory } from '@/utils/types/product';
+import { useCartItem } from '@/utils/hooks/useCartItem';
 
-type MainProductCard = Product;
+type MainProductCardProps = Product;
 
 const getProductType = (
   category: ProductCategory,
@@ -20,16 +21,20 @@ const getProductType = (
   }
 };
 
+const INITIAL_PRODUCT_STOCK = 0;
+
 const MainProductCard = ({
+  id,
   price,
   name,
   description,
   rating,
   images,
   category,
+  stock,
   isCaffeineFree = false,
   isGlutenFree = false,
-}: MainProductCard) => {
+}: MainProductCardProps) => {
   const { CPrice } = useContext(CurrencyContext);
 
   const navigate = useNavigate();
@@ -39,6 +44,21 @@ const MainProductCard = ({
   };
 
   const productType = getProductType(category, { isCaffeineFree, isGlutenFree });
+
+  const { addCartItem, removeCartItem, cartItems } = useCartItem();
+
+  const onClickMinusButton = () => {
+    removeCartItem(String(id));
+  };
+
+  const onClickPlustButton = () => {
+    addCartItem(String(id), 1);
+  };
+
+  const cartSize = cartItems.get(String(id)) ?? 0;
+
+  const isDisabledPlustButton = cartSize >= stock;
+  const isDisabledMinusButton = cartSize <= INITIAL_PRODUCT_STOCK;
 
   return (
     <ProductItem.Root onClick={() => handleClickProduct(1)}>
@@ -52,9 +72,9 @@ const MainProductCard = ({
         {productType && <ProductItem.FreeTag type={productType} />}
       </ProductItem.Meta>
       <Counter.Root>
-        <Counter.Minus onClick={() => {}} disabled={true} />
-        <Counter.Display value={3} />
-        <Counter.Plus onClick={() => {}} />
+        <Counter.Minus onClick={onClickMinusButton} disabled={isDisabledMinusButton} />
+        <Counter.Display value={cartSize} />
+        <Counter.Plus onClick={onClickPlustButton} disabled={isDisabledPlustButton} />
       </Counter.Root>
     </ProductItem.Root>
   );
