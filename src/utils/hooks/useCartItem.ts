@@ -71,7 +71,7 @@ const removeCartItem = (id: string) => {
 };
 
 export const useCartItem = () => {
-  const cartItems = useSyncExternalStore(subscribe, getStoredData, () => new Map());
+  const cartItems = useSyncExternalStore(subscribe, getStoredData);
 
   return { cartItems, addCartItem, removeCartItem };
 };
